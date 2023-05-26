@@ -1,6 +1,5 @@
 FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
 
-LABEL maintainer="Your Name <your.email@example.com>"
 LABEL description="Docker image for GPTQ-for-LLaMa and Text Generation WebUI"
 
 RUN apt-get update && \
@@ -11,9 +10,6 @@ RUN --mount=type=cache,target=/root/.cache/pip pip3 install virtualenv
 RUN mkdir /app
 
 WORKDIR /app
-
-ARG WEBUI_VERSION
-RUN test -n "${WEBUI_VERSION}" && git reset --hard ${WEBUI_VERSION} || echo "Using provided webui source"
 
 RUN virtualenv /app/venv
 RUN . /app/venv/bin/activate && \
