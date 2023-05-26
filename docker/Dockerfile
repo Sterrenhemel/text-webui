@@ -29,9 +29,14 @@ RUN --mount=type=cache,target=/root/.cache/pip . /app/venv/bin/activate && cd ex
 
 COPY requirements.txt /app/requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip . /app/venv/bin/activate && \
-    pip3 install -r requirements.txt
+    pip3 install -r requirements.tx
 
 RUN cp /app/venv/lib/python3.10/site-packages/bitsandbytes/libbitsandbytes_cuda118.so /app/venv/lib/python3.10/site-packages/bitsandbytes/libbitsandbytes_cpu.so
+
+ENV PYTHONUNBUFFERED=1
+EXPOSE 7860
+EXPOSE 5000
+EXPOSE 5005
 
 COPY . /app/
 ENV CLI_ARGS=""
